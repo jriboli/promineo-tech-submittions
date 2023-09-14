@@ -13,10 +13,12 @@ public class Week04_Coding_Project {
         //          it is dynamic (works for arrays of different lengths).
         //    c. Use a loop to iterate through the array and calculate the average age. Print the result to the console.
 
+    	// Creating int array and initializing it with values
         int[] ages = new int[] {3, 9, 23, 64, 2, 8, 28, 93};
         System.out.print("1a. The first element minus last element in 'ages' is : "); 
         firstMinusLast(ages);
 
+        // Creating int array and initializing it with values
         int[] numbers = new int[] {1, 2, 3, 4, 5, 6, 7, 8, 9};
         System.out.print("1b. The first element minus last element in 'numbers' is : "); 
         firstMinusLast(numbers);
@@ -62,7 +64,7 @@ public class Week04_Coding_Project {
         //    7. Write a method that takes a String, word, and an int, n, as arguments and returns the word
         //      concatenated to itself n number of times. (i.e. if I pass in “Hello” and 3, I expect the method to
         //      return “HelloHelloHello”).
-        System.out.println("7. Method that repeats a String, result is : " + concateNTimes("Hello", 3));
+        System.out.println("7. Method that repeats a String, result is : " + concateXTimes("Hello", 3));
         System.out.println("---------------------------------");
 
         //    8. Write a method that takes two Strings, firstName and lastName, and returns a full name (the full name
@@ -159,7 +161,7 @@ public class Week04_Coding_Project {
         return String.format("%s %s", firstName, lastName);
     }
 
-    public static String concateNTimes(String word, int n) {
+    public static String concateXTimes(String word, int n) {
         String newWord = "";
         // Used for loop since we know the iteration count
         for(int i = 0; i < n; i++) {
@@ -169,6 +171,8 @@ public class Week04_Coding_Project {
     }
 
     public static void firstMinusLast(int[] arr) {
+    	// We are subtracting the value in the first position from the value in the last position
+    	// and printing to console
         System.out.println(arr[arr.length - 1] - arr[0]);
     }
 
@@ -203,6 +207,6 @@ public class Week04_Coding_Project {
         for(String word : arr) {
             newString += word + " ";
         }
-        return newString;
+        return newString.trim();
     }
 }

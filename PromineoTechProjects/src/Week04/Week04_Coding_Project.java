@@ -1,5 +1,8 @@
 package Week04;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Week04_Coding_Project {
 
     public static void main(String[] args) {
@@ -95,6 +98,19 @@ public class Week04_Coding_Project {
         //      you created it.
         System.out.println(String.format("13. Your dog is %s years old.", calcDogAge(7)));
         System.out.println("---------------------------------");
+        
+        System.out.println("13. Is Hannah a palidrome, result is : " + isPalidrome("Hannah"));
+        System.out.println("13. Is racecar a palidrome, result is : " + isPalidrome("racecar"));
+        System.out.println("13. Is rock a palidrome, result is : " + isPalidrome("rock"));
+    }
+    
+    public static boolean isPalidrome(String str) {
+    	char[] wordLetters = str.toLowerCase().toCharArray();
+    	for(int i = 0; i < wordLetters.length; i++) {
+    		if(wordLetters[i] != wordLetters[wordLetters.length - 1 -i])
+    			return false;
+    	} 	
+    	return true;
     }
     
     public static int calcDogAge(int age) {

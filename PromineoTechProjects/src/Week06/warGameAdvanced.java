@@ -23,7 +23,6 @@ public class warGameAdvanced extends warGameBase implements CardGame {
 
 	@Override
 	public void round() {
-		
 		List<Card> currentRoundCards = new ArrayList<>();
 		recursiveRound(currentRoundCards);
 		
@@ -62,13 +61,13 @@ public class warGameAdvanced extends warGameBase implements CardGame {
 		currentRoundCards.add(player2Card);
 		
 		if(player1Card.getValue() == player2Card.getValue()) {
-			System.out.println("Draw - enter war scenario");
+			System.out.println(">> Draw - enter WAR scenario");
 			recursiveRound(currentRoundCards);
 		} else if(player1Card.getValue() > player2Card.getValue()) {
-			System.out.println("Hand goes to " + player1.getName());
+			System.out.println(">> Hand goes to " + player1.getName());
 			player1.pickUp(currentRoundCards);
 		} else {
-			System.out.println("Hand goes to " + player2.getName());
+			System.out.println(">> Hand goes to " + player2.getName());
 			player2.pickUp(currentRoundCards);
 		}
 	}

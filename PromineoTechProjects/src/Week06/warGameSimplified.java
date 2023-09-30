@@ -26,13 +26,13 @@ public class warGameSimplified extends warGameBase implements CardGame  {
 		player2Flipped.describe();
 		
 		if(player1Flipped.getValue() == player2Flipped.getValue()) {
-			System.out.println("Draw - no point given");
+			System.out.println(">> Draw - no point given");
 		} else if(player1Flipped.getValue() > player2Flipped.getValue()) {
 			player1.incrementScore();
-			System.out.println("Point awarded to " + player1.getName());
+			System.out.println(">> Point awarded to " + player1.getName());
 		} else {
 			player2.incrementScore();
-			System.out.println("Point awarded to " + player2.getName());
+			System.out.println(">> Point awarded to " + player2.getName());
 		}
 	}
 

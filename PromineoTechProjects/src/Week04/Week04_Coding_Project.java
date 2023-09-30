@@ -1,8 +1,5 @@
 package Week04;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Week04_Coding_Project {
 
     public static void main(String[] args) {

@@ -21,8 +21,7 @@ public class App {
 				System.out.println("3) Exit");
 				System.out.println("Make your choice:");
 				choice = scanner.nextInt();
-				
-				CardGame warTheGame; 
+				 
 				if (choice == 1) {
 					startGame(new warGameSimplified());
 				} else if (choice == 2) {

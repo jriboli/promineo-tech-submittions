@@ -1,0 +1,15 @@
+spring:
+   datasource:
+      username: clinical_study
+      password: clinical_study
+      url: jdbc:mysql://localhost:3306/clinical_study
+      
+   jpa:
+      hibernate:
+         ddl-auto: create
+      show-sql: true
+      defer-datasource-initialization: true
+   
+   sql: 
+      init:
+         mode: always

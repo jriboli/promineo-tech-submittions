@@ -19,11 +19,18 @@ import clinicalstudyconnections.model.DoctorData;
 import clinicalstudyconnections.model.OwnerData;
 import clinicalstudyconnections.model.SiteData;
 import clinicalstudyconnections.service.ClinicalStudyConnectionService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @RequestMapping("/api")
 @Slf4j
+@Tag(name = "owner", description = "The Owner API")
 public class OwnerController {
 	
 	private ClinicalStudyConnectionService service;
@@ -36,6 +43,8 @@ public class OwnerController {
 	 * ---- OWNER --------------------------------------------------------------------
 	 */
 
+	@Operation(summary = "Get all Owners", description = "This can only be done by the Admin in user.", tags = { "owner" })
+	@ApiResponses(value = { @ApiResponse(description = "successful operation", content = { @Content(mediaType = "application/json", schema = @Schema(implementation = OwnerData.class)), @Content(mediaType = "application/xml", schema = @Schema(implementation = OwnerData.class)) }) })
 	@GetMapping("/owners")
 	public List<OwnerData> getAllOwners() {
 		log.info("Grabbing all owners");

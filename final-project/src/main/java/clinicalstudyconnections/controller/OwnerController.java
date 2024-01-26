@@ -3,7 +3,9 @@ package clinicalstudyconnections.controller;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,18 +21,14 @@ import clinicalstudyconnections.model.DoctorData;
 import clinicalstudyconnections.model.OwnerData;
 import clinicalstudyconnections.model.SiteData;
 import clinicalstudyconnections.service.ClinicalStudyConnectionService;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @RequestMapping("/api")
 @Slf4j
-@Tag(name = "owner", description = "The Owner API")
+// Annotation for Swagger
+@Tag(name = "Owners", description = "Operations on Owners.")
 public class OwnerController {
 	
 	private ClinicalStudyConnectionService service;
@@ -43,8 +41,6 @@ public class OwnerController {
 	 * ---- OWNER --------------------------------------------------------------------
 	 */
 
-	@Operation(summary = "Get all Owners", description = "This can only be done by the Admin in user.", tags = { "owner" })
-	@ApiResponses(value = { @ApiResponse(description = "successful operation", content = { @Content(mediaType = "application/json", schema = @Schema(implementation = OwnerData.class)), @Content(mediaType = "application/xml", schema = @Schema(implementation = OwnerData.class)) }) })
 	@GetMapping("/owners")
 	public List<OwnerData> getAllOwners() {
 		log.info("Grabbing all owners");
@@ -58,10 +54,22 @@ public class OwnerController {
 	}
 	
 	@PostMapping("/owners")
-	@ResponseStatus(code = HttpStatus.CREATED)
-	public OwnerData createOwner(@RequestBody OwnerData ownerData) {
-		log.info("Create owner {}", ownerData);
-		return service.saveOwner(ownerData);
+	//@ResponseStatus(code = HttpStatus.CREATED)
+	// Trying something new called ResponseEntity
+	// https://www.baeldung.com/spring-response-entity
+	public ResponseEntity<String> createOwner(@RequestBody OwnerData ownerData) {
+		// Cool function to have base Model support toJson
+		log.info("Create owner {}", ownerData.toJson());
+		
+		// Headers
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Content-Type", "application/json");
+		
+		// Added func in Data to check if is valid before proceeding
+		if(!ownerData.isValid()) {
+			return new ResponseEntity<>("Invalid Owner Data provided. Please review and try again.", headers, HttpStatus.BAD_REQUEST);
+		}
+		return new ResponseEntity<>(service.saveOwner(ownerData).toJson(), headers, HttpStatus.CREATED);
 	}
 
 	@PutMapping("/owners/{ownerId}")
